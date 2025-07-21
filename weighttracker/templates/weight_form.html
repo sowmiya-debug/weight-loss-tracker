@@ -1,0 +1,12 @@
+{% extends 'layout/app_layout.html' %}
+{% block 'content' %}
+<h2>Add/Edit Weight</h2>
+{% if error %}
+  <div class="alert alert-danger"> {{ error }} </div>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-primary">Save</button>
+</form>
+{% endblock %}

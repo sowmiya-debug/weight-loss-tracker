@@ -1,0 +1,10 @@
+<h2>Are you sure you want to delete?</h2>
+<ul>
+    <li>date:{{entry.date_added}}</li>
+    <li>weight:{{entry.weight}}</li>
+</ul>
+<form method="post">
+  {% csrf_token %}
+  <button type="submit">Yes, Delete</button>
+</form>
+<a href="{% url 'weight_list' %}">Cancel</a>
