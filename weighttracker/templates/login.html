@@ -1,16 +1,99 @@
 {% extends 'layout/app_layout.html' %}
 {% block 'content' %}
-<h2>Login</h2>
-<form method="post">
-    {% csrf_token %}
-    <div class="mb-3">
-        <label for="username">Username</label>
-        <input class="form-control" type="text" name="username" required>
-    </div>
-    <div class="mb-3">
-        <label for="password">Password</label>
-        <input class="form-control" type="password" name="password" required>
-    </div>
-    <button class="btn btn-success">Login</button>
-</form>
+<style>
+    /* Login Form Styling */
+    .login-container {
+        max-width: 450px;
+        margin: 2rem auto;
+        padding: 2rem;
+    }
+    
+    .login-title {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #2c3e50;
+        font-weight: 600;
+        font-size: 2rem;
+    }
+
+    .login-form {
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 2.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #495057;
+        font-weight: 500;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-input:focus {
+        border-color: #4dabf7;
+        box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.2);
+        outline: none;
+    }
+
+    .login-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #2f9e44;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .login-btn:hover {
+        background-color: #2b8a3e;
+    }
+
+    .login-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #868e96;
+    }
+
+    .login-footer a {
+        color: #4dabf7;
+        text-decoration: none;
+    }
+</style>
+
+<div class="login-container">
+    <h2 class="login-title">Login</h2>
+    <form method="post" class="login-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <input class="form-input" type="text" name="username" required>
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input class="form-input" type="password" name="password" required>
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+        <div class="login-footer">
+            Don't have an account? <a href="{% url 'signup' %}">Register here</a>
+        </div>
+    </form>
+</div>
 {% endblock %}

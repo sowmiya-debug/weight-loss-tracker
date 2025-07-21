@@ -1,10 +1,124 @@
 {% extends 'layout/app_layout.html' %}
 {% block 'content' %}
+<style>
+    /* Main Container */
+    .signup-container {
+        max-width: 500px;
+        margin: 2rem auto;
+        padding: 2rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-<h2> Sign Up</h2>
-<form method = "POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type = "submit"> Sign Up</button>
-</form> 
+    /* Title Styling */
+    .signup-title {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #2c3e50;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    /* Form Styling */
+    .signup-form {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Form Elements */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #495057;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus {
+        border-color: #4dabf7;
+        outline: 0;
+        box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.25);
+    }
+
+    /* Error Messages */
+    .errorlist {
+        color: #dc3545;
+        margin-top: 0.25rem;
+        font-size: 0.85rem;
+        list-style: none;
+        padding-left: 0;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #218838;
+    }
+
+    /* Login Link */
+    .login-link {
+        text-align: center;
+        margin-top: 1.5rem;
+        color: #6c757d;
+    }
+
+    .login-link a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="signup-container">
+    <h2 class="signup-title">Sign Up</h2>
+    <form method="POST" class="signup-form">
+        {% csrf_token %}
+        
+        {% for field in form %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.errors %}
+                <div class="errorlist">{{ field.errors }}</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+        
+        <button type="submit" class="submit-btn">Sign Up</button>
+    </form>
+    
+    <div class="login-link">
+        Already have an account? <a href="{% url 'login' %}">Log in</a>
+    </div>
+</div>
 {% endblock %}

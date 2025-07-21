@@ -1,12 +1,121 @@
 {% extends 'layout/app_layout.html' %}
 {% block 'content' %}
-<h2>Add/Edit Weight</h2>
-{% if error %}
-  <div class="alert alert-danger"> {{ error }} </div>
-{% endif %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button class="btn btn-primary">Save</button>
-</form>
+<style>
+    /* Weight Form Container */
+    .weight-form-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Form Title */
+    .weight-form-title {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #2c3e50;
+        font-size: 1.8rem;
+        font-weight: 600;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    /* Alert Styling */
+    .alert {
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 1.5rem;
+        border-radius: 4px;
+        font-size: 0.95rem;
+    }
+
+    .alert-danger {
+        color: #721c24;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+    }
+
+    /* Form Styling */
+    .weight-form {
+        background: #ffffff;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Form Elements */
+    .weight-form p {
+        margin-bottom: 1.5rem;
+    }
+
+    .weight-form label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #495057;
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .weight-form input,
+    .weight-form select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .weight-form input:focus,
+    .weight-form select:focus {
+        border-color: #4dabf7;
+        outline: 0;
+        box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.25);
+    }
+
+    /* Submit Button */
+    .submit-btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        text-align: center;
+        width: 100%;
+    }
+
+    .submit-btn:hover {
+        background-color: #0069d9;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .weight-form-container {
+            padding: 1rem;
+            margin: 1rem auto;
+        }
+        
+        .weight-form {
+            padding: 1.5rem;
+        }
+    }
+</style>
+
+<div class="weight-form-container">
+    <h2 class="weight-form-title">Add/Edit Weight</h2>
+    
+    {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    
+    <form method="post" class="weight-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-btn">Save</button>
+    </form>
+</div>
 {% endblock %}

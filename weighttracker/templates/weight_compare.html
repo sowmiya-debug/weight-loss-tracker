@@ -1,16 +1,132 @@
 {% extends 'layout/app_layout.html' %}
-
-
 {% block 'content' %}
-<h2>Compare Weight</h2>
-<form method="post">
-    {% csrf_token %}
-    <label>From Date:</label> <input type="date" name="start_date" required><br>
-  <label>To Date:</label> <input type="date" name="end_date" required><br>
-    <button type="submit">Compare</button>
-</form>
-{% if result is not None %}
-   <span>{{ result }}</span> 
-{% endif %}
+<style>
+    /* Main Container */
+    .compare-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Title Styling */
+    .compare-title {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #2c3e50;
+        font-size: 1.8rem;
+        font-weight: 600;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #f0f0f0;
+    }
+
+    /* Form Styling */
+    .compare-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        font-weight: 500;
+        color: #495057;
+        font-size: 1rem;
+    }
+
+    .form-group input {
+        padding: 0.75rem;
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+        border-color: #4dabf7;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.25);
+    }
+
+    /* Submit Button */
+    .submit-btn {
+        padding: 0.75rem 1.5rem;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        align-self: center;
+        width: 150px;
+    }
+
+    .submit-btn:hover {
+        background-color: #218838;
+    }
+
+    /* Results Display */
+    .results-container {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .result-text {
+        font-size: 1.2rem;
+        color: #2c3e50;
+        font-weight: 500;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .compare-container {
+            padding: 1.5rem;
+            margin: 1rem;
+        }
+        
+        .compare-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<div class="compare-container">
+    <h2 class="compare-title">Compare Weight</h2>
+    
+    <form method="post" class="compare-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="start_date">From Date:</label>
+            <input type="date" name="start_date" id="start_date" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="end_date">To Date:</label>
+            <input type="date" name="end_date" id="end_date" required>
+        </div>
+        
+        <button type="submit" class="submit-btn">Compare</button>
+    </form>
+    
+    {% if result is not None %}
+    <div class="results-container">
+        <p class="result-text">{{ result }}</p>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}
 
